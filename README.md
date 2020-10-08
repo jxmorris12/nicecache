@@ -2,6 +2,8 @@
 
 A cache that persists data between runs. Trust me, you need this.
 
+![nicecache on pypi](https://badge.fury.io/py/nicecache.svg)
+
 `@functools.cache` is nice, but there's a slight problem -- each program starts
 its own cache fresh. In comes `@nicecache.nicecache`. Use it just like you'd
 use `@functools.cache`, but rest assured that you really only have to compute
@@ -61,4 +63,22 @@ By default values are cached to `~/.nicecache`. Specify a different folder path
 by passing an argument to the decorator. For example, 
 `@nicecache('/tmp/cache/path')`.
 
-## `NiceCache`
+## `NiceCache` object
+
+You can also initialize a `NiceCache` object and use it like a dictionary. It 
+functions like a normal dictionary, but values persist between runs.
+
+In one of a program:
+```
+import nicecache
+cache = nicecache.NiceCache('jack_tmp_cache_vals')
+cache['hello'] = 'hi'
+```
+
+And in another run of the program:
+```
+>> import nicecache
+>> cache = nicecache.NiceCache('jack_tmp_cache_vals')
+>> print(cache['hello'])
+'hi'
+```
